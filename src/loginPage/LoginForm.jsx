@@ -81,9 +81,9 @@ const LoginForm = () => {
             <input type="checkbox" className="mr-2" />
             Remember me
           </label>
-          <a href="#" className="hover:underline"> 
-            Forgot password?
-          </a>
+         
+            <Link className="hover:underline" to="/gate-pass-system/forgot-password">Forgot password?</Link>
+          
         </div>
 
         {/* Login Button */}
