@@ -1,6 +1,7 @@
 import { FaUser, FaLock, FaEnvelope } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import background from './assets/background.jpg'; 
+import { Link } from "react-router-dom";
 
 
 const RegisterForm = () => {
@@ -138,9 +139,8 @@ const RegisterForm = () => {
         {/* Already Have Account Link */}
         <div className="text-center text-white mt-4">
           Already have an account?{" "}
-          <a href="#" className="text-purple-300 hover:underline">
-            Login
-          </a>
+          <Link className="text-purple-300 hover:underline" to="/gate-pass-system/">Login</Link>
+            
         </div>
       </form>
     </div>

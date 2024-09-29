@@ -6,7 +6,7 @@ import ForgotPassword from "./loginPage/ForgotPassword";
 
 
 function App(){
-  return <>
+  return <div className="font-nunito">
    <Router>
       <Routes>
         <Route path="/gate-pass-system" element={<LoginPage />} />
@@ -15,7 +15,7 @@ function App(){
       </Routes>
     </Router>
   
-  </>
+  </div>
 }
 
 export default App;

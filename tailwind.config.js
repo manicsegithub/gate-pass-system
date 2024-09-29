@@ -8,6 +8,10 @@ export default {
     extend: {
       backgroundImage:{
         "login-background":"url('./assets/background.jpg')",
+      },
+      fontFamily:{
+        
+        "nunito":"'Nunito',sans-serif",
       }
     },
   },

@@ -1,19 +1,42 @@
 import { Link } from "react-router-dom";
 import { FaUser, FaLock } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-
+import { useState, useEffect } from "react";
 
 const LoginForm = () => {
+  
+  const [rememberMe, setRememberMe] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,  
   } = useForm();
 
+  
+  useEffect(() => {
+    const savedUsername = localStorage.getItem("rememberedUsername");
+    if (savedUsername) {
+      setValue("Username", savedUsername); 
+      setRememberMe(true); 
+    }
+  }, [setValue]); 
+
+  
   const onSubmission = (data) => {
     console.log(data);
-    reset();
+
+    
+    if (rememberMe) {
+      localStorage.setItem("rememberedUsername", data.Username);
+    } else {
+      
+      localStorage.removeItem("rememberedUsername");
+    }
+
+    reset(); 
   };
 
   return (
@@ -76,30 +99,42 @@ const LoginForm = () => {
         </div>
 
         {/* Remember Me & Forgot Password */}
-        <div className="flex justify-between items-center text-white gap-10">
-          <label className="flex items-center">
-            <input type="checkbox" className="mr-2" />
+        <div className="flex justify-between items-center text-white gap-7 sm:gap-10">
+          <label className="flex items-center max-sm:text-sm">
+            <input
+              type="checkbox"
+              className="mr-2"
+              checked={rememberMe} 
+              onChange={(e) => setRememberMe(e.target.checked)} 
+            />
             Remember me
           </label>
-         
-            <Link className="hover:underline" to="/gate-pass-system/forgot-password">Forgot password?</Link>
-          
+
+          <Link
+            className="hover:underline max-sm:text-sm"
+            to="/gate-pass-system/forgot-password"
+          >
+            Forgot password?
+          </Link>
         </div>
 
         {/* Login Button */}
         <button
-          className="text-white bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-400/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm w-full transition-all duration-1000 px-5 py-2 text-center mr-2 mb-2"
+          className="text-white bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-400/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-[15px] w-full transition-all duration-1000 px-5 py-2 text-center mr-2 mb-2"
           type="submit"
         >
           Login
         </button>
 
         {/* Register Link */}
-        <div className="text-center text-white mt-4">
+        <div className="text-center text-white mt-4 max-sm:text-sm">
           Don&apos;t have an account?{" "}
-           <Link to="/gate-pass-system/register" className="text-purple-400 hover:underline">Register</Link>
-           
-          
+          <Link
+            to="/gate-pass-system/register"
+            className="text-purple-400 hover:underline"
+          >
+            Register
+          </Link>
         </div>
       </form>
     </div>
